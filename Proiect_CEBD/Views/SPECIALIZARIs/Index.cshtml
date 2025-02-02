@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Proiect_CEBD.Models.SPECIALIZARI>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center mb-4 text-primary">💼 Specializări</h2>
+
+<!-- Tabel cu specializări -->
+
+<table class="table table-hover table-striped border rounded shadow-sm mt-3">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ID_SPECIALIZARE)</th>
+            <th>@Html.DisplayNameFor(model => model.DENUMIRE)</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ID_SPECIALIZARE)</td>
+                <td>@Html.DisplayFor(modelItem => item.DENUMIRE)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_SPECIALIZARE }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID_SPECIALIZARE }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_SPECIALIZARE })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Card pentru adăugarea unei noi specilizări -->
+<div class="card bg-light border rounded shadow-sm mt-4 p-3">
+    <div class="card-body text-center">
+        <h4 class="card-title text-success">➕ Adaugă o specializare nouă</h4>
+        <p class="card-text">Completează datele unei noi specializări în sistem.</p>
+        @Html.ActionLink("Adaugă o nouă specializare", "Create", null, new { @class = "btn btn-success px-4 fw-bold" })
+    </div>
+</div>
+
+

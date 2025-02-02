@@ -1,0 +1,80 @@
+﻿@model Proiect_CEBD.Models.PACIENTI
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PACIENTI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRENUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRENUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ASIGURARE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASIGURARE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARD_SANATATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARD_SANATATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADRESA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADRESA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFON)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿@model Proiect_CEBD.Models.MEDICI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MEDICI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRENUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRENUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFON)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PARAFA_MEDIC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PARAFA_MEDIC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SPECIALIZARI.DENUMIRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPECIALIZARI.DENUMIRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_MEDIC }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

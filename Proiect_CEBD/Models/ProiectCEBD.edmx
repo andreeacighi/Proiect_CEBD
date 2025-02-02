@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProiectCebd.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CONSULTATII">
+          <Key>
+            <PropertyRef Name="ID_CONSULTATIE" />
+          </Key>
+          <Property Name="ID_CONSULTATIE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="DIAGNOSTIC" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="SPITALIZARE" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="RETETA" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="ID_PROGRAMARE" Type="number" Precision="4" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MEDICI">
+          <Key>
+            <PropertyRef Name="ID_MEDIC" />
+          </Key>
+          <Property Name="ID_MEDIC" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NUME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRENUME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="TELEFON" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="PARAFA_MEDIC" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SPECIALIZARI_ID" Type="number" Precision="4" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PACIENTI">
+          <Key>
+            <PropertyRef Name="ID_PACIENT" />
+          </Key>
+          <Property Name="ID_PACIENT" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NUME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRENUME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CNP" Type="varchar2" MaxLength="14" Nullable="false" />
+          <Property Name="ASIGURARE" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="CARD_SANATATE" Type="varchar2" MaxLength="20" />
+          <Property Name="ADRESA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFON" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROGRAMARI">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMARE" />
+          </Key>
+          <Property Name="ID_PROGRAMARE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="DATA" Type="date" Nullable="false" />
+          <Property Name="ORA" Type="varchar2" MaxLength="5" Nullable="false" />
+          <Property Name="STATUS_PROGRAMARE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_MEDIC" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="ID_PACIENT" Type="number" Precision="4" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPECIALIZARI">
+          <Key>
+            <PropertyRef Name="ID_SPECIALIZARE" />
+          </Key>
+          <Property Name="ID_SPECIALIZARE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="DENUMIRE" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="CONSULTATII_FK1">
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="1" />
+          <End Role="CONSULTATII" Type="Self.CONSULTATII" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMARI">
+              <PropertyRef Name="ID_PROGRAMARE" />
+            </Principal>
+            <Dependent Role="CONSULTATII">
+              <PropertyRef Name="ID_PROGRAMARE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MEDICI_FK1">
+          <End Role="SPECIALIZARI" Type="Self.SPECIALIZARI" Multiplicity="1" />
+          <End Role="MEDICI" Type="Self.MEDICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALIZARI">
+              <PropertyRef Name="ID_SPECIALIZARE" />
+            </Principal>
+            <Dependent Role="MEDICI">
+              <PropertyRef Name="SPECIALIZARI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMARI_FK1">
+          <End Role="MEDICI" Type="Self.MEDICI" Multiplicity="1" />
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICI">
+              <PropertyRef Name="ID_MEDIC" />
+            </Principal>
+            <Dependent Role="PROGRAMARI">
+              <PropertyRef Name="ID_MEDIC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMARI_FK2">
+          <End Role="PACIENTI" Type="Self.PACIENTI" Multiplicity="1" />
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTI">
+              <PropertyRef Name="ID_PACIENT" />
+            </Principal>
+            <Dependent Role="PROGRAMARI">
+              <PropertyRef Name="ID_PACIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProiectCebdStoreContainer">
+          <EntitySet Name="CONSULTATII" EntityType="Self.CONSULTATII" Schema="CEBD_PROIECT" store:Type="Tables" />
+          <EntitySet Name="MEDICI" EntityType="Self.MEDICI" Schema="CEBD_PROIECT" store:Type="Tables" />
+          <EntitySet Name="PACIENTI" EntityType="Self.PACIENTI" Schema="CEBD_PROIECT" store:Type="Tables" />
+          <EntitySet Name="PROGRAMARI" EntityType="Self.PROGRAMARI" Schema="CEBD_PROIECT" store:Type="Tables" />
+          <EntitySet Name="SPECIALIZARI" EntityType="Self.SPECIALIZARI" Schema="CEBD_PROIECT" store:Type="Tables" />
+          <AssociationSet Name="CONSULTATII_FK1" Association="Self.CONSULTATII_FK1">
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARI" />
+            <End Role="CONSULTATII" EntitySet="CONSULTATII" />
+          </AssociationSet>
+          <AssociationSet Name="MEDICI_FK1" Association="Self.MEDICI_FK1">
+            <End Role="SPECIALIZARI" EntitySet="SPECIALIZARI" />
+            <End Role="MEDICI" EntitySet="MEDICI" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMARI_FK1" Association="Self.PROGRAMARI_FK1">
+            <End Role="MEDICI" EntitySet="MEDICI" />
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARI" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMARI_FK2" Association="Self.PROGRAMARI_FK2">
+            <End Role="PACIENTI" EntitySet="PACIENTI" />
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProiectCebd" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CONSULTATII">
+          <Key>
+            <PropertyRef Name="ID_CONSULTATIE" />
+          </Key>
+          <Property Name="ID_CONSULTATIE" Type="Int16" Nullable="false" />
+          <Property Name="DIAGNOSTIC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SPITALIZARE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RETETA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_PROGRAMARE" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PROGRAMARI" Relationship="Self.CONSULTATII_FK1" FromRole="CONSULTATII" ToRole="PROGRAMARI" />
+        </EntityType>
+        <EntityType Name="MEDICI">
+          <Key>
+            <PropertyRef Name="ID_MEDIC" />
+          </Key>
+          <Property Name="ID_MEDIC" Type="Int16" Nullable="false" />
+          <Property Name="NUME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRENUME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PARAFA_MEDIC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SPECIALIZARI_ID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="SPECIALIZARI" Relationship="Self.MEDICI_FK1" FromRole="MEDICI" ToRole="SPECIALIZARI" />
+          <NavigationProperty Name="PROGRAMARIs" Relationship="Self.PROGRAMARI_FK1" FromRole="MEDICI" ToRole="PROGRAMARI" />
+        </EntityType>
+        <EntityType Name="PACIENTI">
+          <Key>
+            <PropertyRef Name="ID_PACIENT" />
+          </Key>
+          <Property Name="ID_PACIENT" Type="Int16" Nullable="false" />
+          <Property Name="NUME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRENUME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CNP" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ASIGURARE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CARD_SANATATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ADRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PROGRAMARIs" Relationship="Self.PROGRAMARI_FK2" FromRole="PACIENTI" ToRole="PROGRAMARI" />
+        </EntityType>
+        <EntityType Name="PROGRAMARI">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMARE" />
+          </Key>
+          <Property Name="ID_PROGRAMARE" Type="Int16" Nullable="false" />
+          <Property Name="DATA" Type="DateTime" Nullable="false" />
+          <Property Name="ORA" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_PROGRAMARE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_MEDIC" Type="Int16" Nullable="false" />
+          <Property Name="ID_PACIENT" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="CONSULTATIIs" Relationship="Self.CONSULTATII_FK1" FromRole="PROGRAMARI" ToRole="CONSULTATII" />
+          <NavigationProperty Name="MEDICI" Relationship="Self.PROGRAMARI_FK1" FromRole="PROGRAMARI" ToRole="MEDICI" />
+          <NavigationProperty Name="PACIENTI" Relationship="Self.PROGRAMARI_FK2" FromRole="PROGRAMARI" ToRole="PACIENTI" />
+        </EntityType>
+        <EntityType Name="SPECIALIZARI">
+          <Key>
+            <PropertyRef Name="ID_SPECIALIZARE" />
+          </Key>
+          <Property Name="ID_SPECIALIZARE" Type="Int16" Nullable="false" />
+          <Property Name="DENUMIRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MEDICIs" Relationship="Self.MEDICI_FK1" FromRole="SPECIALIZARI" ToRole="MEDICI" />
+        </EntityType>
+        <Association Name="CONSULTATII_FK1">
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="1" />
+          <End Role="CONSULTATII" Type="Self.CONSULTATII" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMARI">
+              <PropertyRef Name="ID_PROGRAMARE" />
+            </Principal>
+            <Dependent Role="CONSULTATII">
+              <PropertyRef Name="ID_PROGRAMARE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MEDICI_FK1">
+          <End Role="SPECIALIZARI" Type="Self.SPECIALIZARI" Multiplicity="1" />
+          <End Role="MEDICI" Type="Self.MEDICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALIZARI">
+              <PropertyRef Name="ID_SPECIALIZARE" />
+            </Principal>
+            <Dependent Role="MEDICI">
+              <PropertyRef Name="SPECIALIZARI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMARI_FK1">
+          <End Role="MEDICI" Type="Self.MEDICI" Multiplicity="1" />
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICI">
+              <PropertyRef Name="ID_MEDIC" />
+            </Principal>
+            <Dependent Role="PROGRAMARI">
+              <PropertyRef Name="ID_MEDIC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMARI_FK2">
+          <End Role="PACIENTI" Type="Self.PACIENTI" Multiplicity="1" />
+          <End Role="PROGRAMARI" Type="Self.PROGRAMARI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTI">
+              <PropertyRef Name="ID_PACIENT" />
+            </Principal>
+            <Dependent Role="PROGRAMARI">
+              <PropertyRef Name="ID_PACIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CONSULTATIIs" EntityType="Self.CONSULTATII" />
+          <EntitySet Name="MEDICIs" EntityType="Self.MEDICI" />
+          <EntitySet Name="PACIENTIs" EntityType="Self.PACIENTI" />
+          <EntitySet Name="PROGRAMARIs" EntityType="Self.PROGRAMARI" />
+          <EntitySet Name="SPECIALIZARIs" EntityType="Self.SPECIALIZARI" />
+          <AssociationSet Name="CONSULTATII_FK1" Association="Self.CONSULTATII_FK1">
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARIs" />
+            <End Role="CONSULTATII" EntitySet="CONSULTATIIs" />
+          </AssociationSet>
+          <AssociationSet Name="MEDICI_FK1" Association="Self.MEDICI_FK1">
+            <End Role="SPECIALIZARI" EntitySet="SPECIALIZARIs" />
+            <End Role="MEDICI" EntitySet="MEDICIs" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMARI_FK1" Association="Self.PROGRAMARI_FK1">
+            <End Role="MEDICI" EntitySet="MEDICIs" />
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARIs" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMARI_FK2" Association="Self.PROGRAMARI_FK2">
+            <End Role="PACIENTI" EntitySet="PACIENTIs" />
+            <End Role="PROGRAMARI" EntitySet="PROGRAMARIs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProiectCebdStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CONSULTATIIs">
+            <EntityTypeMapping TypeName="ProiectCebd.CONSULTATII">
+              <MappingFragment StoreEntitySet="CONSULTATII">
+                <ScalarProperty Name="ID_CONSULTATIE" ColumnName="ID_CONSULTATIE" />
+                <ScalarProperty Name="DIAGNOSTIC" ColumnName="DIAGNOSTIC" />
+                <ScalarProperty Name="SPITALIZARE" ColumnName="SPITALIZARE" />
+                <ScalarProperty Name="RETETA" ColumnName="RETETA" />
+                <ScalarProperty Name="ID_PROGRAMARE" ColumnName="ID_PROGRAMARE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDICIs">
+            <EntityTypeMapping TypeName="ProiectCebd.MEDICI">
+              <MappingFragment StoreEntitySet="MEDICI">
+                <ScalarProperty Name="ID_MEDIC" ColumnName="ID_MEDIC" />
+                <ScalarProperty Name="NUME" ColumnName="NUME" />
+                <ScalarProperty Name="PRENUME" ColumnName="PRENUME" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="PARAFA_MEDIC" ColumnName="PARAFA_MEDIC" />
+                <ScalarProperty Name="SPECIALIZARI_ID" ColumnName="SPECIALIZARI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACIENTIs">
+            <EntityTypeMapping TypeName="ProiectCebd.PACIENTI">
+              <MappingFragment StoreEntitySet="PACIENTI">
+                <ScalarProperty Name="ID_PACIENT" ColumnName="ID_PACIENT" />
+                <ScalarProperty Name="NUME" ColumnName="NUME" />
+                <ScalarProperty Name="PRENUME" ColumnName="PRENUME" />
+                <ScalarProperty Name="CNP" ColumnName="CNP" />
+                <ScalarProperty Name="ASIGURARE" ColumnName="ASIGURARE" />
+                <ScalarProperty Name="CARD_SANATATE" ColumnName="CARD_SANATATE" />
+                <ScalarProperty Name="ADRESA" ColumnName="ADRESA" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROGRAMARIs">
+            <EntityTypeMapping TypeName="ProiectCebd.PROGRAMARI">
+              <MappingFragment StoreEntitySet="PROGRAMARI">
+                <ScalarProperty Name="ID_PROGRAMARE" ColumnName="ID_PROGRAMARE" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="ORA" ColumnName="ORA" />
+                <ScalarProperty Name="STATUS_PROGRAMARE" ColumnName="STATUS_PROGRAMARE" />
+                <ScalarProperty Name="ID_MEDIC" ColumnName="ID_MEDIC" />
+                <ScalarProperty Name="ID_PACIENT" ColumnName="ID_PACIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPECIALIZARIs">
+            <EntityTypeMapping TypeName="ProiectCebd.SPECIALIZARI">
+              <MappingFragment StoreEntitySet="SPECIALIZARI">
+                <ScalarProperty Name="ID_SPECIALIZARE" ColumnName="ID_SPECIALIZARE" />
+                <ScalarProperty Name="DENUMIRE" ColumnName="DENUMIRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

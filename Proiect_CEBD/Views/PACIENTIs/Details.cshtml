@@ -1,0 +1,74 @@
+﻿@model Proiect_CEBD.Models.PACIENTI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PACIENTI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRENUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRENUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ASIGURARE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASIGURARE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARD_SANATATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARD_SANATATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADRESA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADRESA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFON)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_PACIENT }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

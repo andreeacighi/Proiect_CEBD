@@ -1,0 +1,15 @@
+﻿
+.form-group{
+    margin-bottom: 20px; /* Mai mult spațiu între grupuri */
+    color: bisque;
+}
+
+.form-control {
+    width: 100%; /* Asigură că dropdown-ul va ocupa toată lățimea disponibilă */
+    max-width: 300px; /* Maximizare lățime dropdown pentru a fi mai mic */
+}
+
+.btn-primary {
+    margin-top: 10px;
+}
+

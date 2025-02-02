@@ -1,0 +1,26 @@
+﻿@model Proiect_CEBD.Models.SPECIALIZARI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SPECIALIZARI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DENUMIRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DENUMIRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_SPECIALIZARE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Proiect_CEBD.Models.PROGRAMARI>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center mb-4 text-primary">📅 Programări</h2>
+
+<!-- Formular de filtrare -->
+<form method="get" action="@Url.Action("Index", "PROGRAMARIs")" class="bg-light border rounded shadow-sm d-flex flex-column mt-2 p-2">
+    <div class="d-flex ">
+        <label for="searchString" class="form-label fw-bold p-1">Nume Medic/Pacient:</label>
+        @Html.TextBox("searchString", Request.QueryString["searchString"], new { @class = "form-control mx-2" })
+        <button type="submit" class="btn btn-primary">Filtrare</button>
+    </div>
+</form>
+
+<!-- Tabel cu programări -->
+<table class="table table-hover table-striped border rounded shadow-sm mt-3">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ID_PROGRAMARE)</th>
+            <th>@Html.DisplayNameFor(model => model.DATA)</th>
+            <th>@Html.DisplayNameFor(model => model.ORA)</th>
+            <th>@Html.DisplayNameFor(model => model.STATUS_PROGRAMARE)</th>
+            <th>@Html.DisplayNameFor(model => model.MEDICI.NUME)</th>
+            <th>@Html.DisplayNameFor(model => model.MEDICI.SPECIALIZARI.DENUMIRE)</th>
+            <th>@Html.DisplayNameFor(model => model.PACIENTI.NUME)</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ID_PROGRAMARE)</td>
+                <td>@Html.DisplayFor(modelItem => item.DATA)</td>
+                <td>@Html.DisplayFor(modelItem => item.ORA)</td>
+                <td>@Html.DisplayFor(modelItem => item.STATUS_PROGRAMARE)</td>
+                <td>@Html.DisplayFor(modelItem => item.MEDICI.NUME)</td>
+                <td>@Html.DisplayFor(modelItem => item.MEDICI.SPECIALIZARI.DENUMIRE)</td>
+                <td>@Html.DisplayFor(modelItem => item.PACIENTI.NUME)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_PROGRAMARE }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID_PROGRAMARE }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_PROGRAMARE })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Card pentru adăugarea unei noi programari -->
+<div class="card bg-light border rounded shadow-sm mt-4 p-3">
+    <div class="card-body text-center">
+        <h4 class="card-title text-success">➕ Adaugă o programare  nouă</h4>
+        <p class="card-text">Completează datele unei noi programări în sistem.</p>
+        @Html.ActionLink("Adaugă o nouă programare", "Create", null, new { @class = "btn btn-success px-4 fw-bold" })
+    </div>
+</div>
+
+
+

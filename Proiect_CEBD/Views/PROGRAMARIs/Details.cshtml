@@ -1,0 +1,58 @@
+﻿@model Proiect_CEBD.Models.PROGRAMARI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PROGRAMARI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATUS_PROGRAMARE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUS_PROGRAMARE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEDICI.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEDICI.NUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PACIENTI.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PACIENTI.NUME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_PROGRAMARE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

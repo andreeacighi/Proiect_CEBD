@@ -1,0 +1,64 @@
+﻿@model Proiect_CEBD.Models.MEDICI
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MEDICI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRENUME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRENUME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFON)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PARAFA_MEDIC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PARAFA_MEDIC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SPECIALIZARI.DENUMIRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPECIALIZARI.DENUMIRE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

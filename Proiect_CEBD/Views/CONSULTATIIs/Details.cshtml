@@ -1,0 +1,50 @@
+﻿@model Proiect_CEBD.Models.CONSULTATII
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CONSULTATII</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DIAGNOSTIC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIAGNOSTIC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SPITALIZARE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPITALIZARE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RETETA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RETETA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROGRAMARI.ORA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROGRAMARI.ORA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_CONSULTATIE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Proiect_CEBD.Models.MEDICI>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2 class="text-center mb-4 text-primary">👩‍⚕️ Medici</h2>
+
+
+
+<!-- Tabel cu medici -->
+
+<table class="table table-hover table-striped border rounded shadow-sm">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ID_MEDIC)</th>
+            <th>@Html.DisplayNameFor(model => model.NUME)</th>
+            <th>@Html.DisplayNameFor(model => model.PRENUME)</th>
+            <th>@Html.DisplayNameFor(model => model.TELEFON)</th>
+            <th>@Html.DisplayNameFor(model => model.PARAFA_MEDIC)</th>
+            <th>@Html.DisplayNameFor(model => model.SPECIALIZARI.DENUMIRE)</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.ID_MEDIC)</td>
+            <td>@Html.DisplayFor(modelItem => item.NUME)</td>
+            <td>@Html.DisplayFor(modelItem => item.PRENUME)</td>
+            <td>@Html.DisplayFor(modelItem => item.TELEFON)</td>
+            <td>@Html.DisplayFor(modelItem => item.PARAFA_MEDIC)</td>
+            <td>@Html.DisplayFor(modelItem => item.SPECIALIZARI.DENUMIRE)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_MEDIC }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_MEDIC }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_MEDIC })
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- Card pentru adăugarea unui nou medic -->
+<div class="card bg-light border rounded shadow-sm mt-4 p-3">
+    <div class="card-body text-center">
+        <h4 class="card-title text-success">➕ Adaugă un medic nou</h4>
+        <p class="card-text">Completează datele unui medic nou în sistem.</p>
+        @Html.ActionLink("Adaugă un medic nou", "Create", null, new { @class = "btn btn-success px-4 fw-bold" })
+    </div>
+</div>
+
+
