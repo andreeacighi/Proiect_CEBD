@@ -1,0 +1,3 @@
+The project is about a medical clinic management application. It includes pages for patients (displaying their details, as well as options to edit, delete, and create new patient records), doctors (similar functionalities as for patients), appointments (viewing appointment details and scheduling new ones), consultations (where patients receive medical evaluations following appointments, which may result in hospitalization or prescriptions), and specializations (listing each doctor's specialties). 
+
+The application is developed in Visual Studio using C# and follows the MVC Controller architecture. The data is managed in a relational database, specifically SQL Oracle.
